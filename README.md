@@ -15,7 +15,7 @@ Another task for you is to add type definition to the `dateUtils.ts` file. Pleas
 
 ## Prerequisite
 
-Make sure you have [Bun](https://bun.sh/) installed before starting the assignment.
+Make sure you have [Bun](https://bun.sh/) (version 1.3 or later) installed before starting the assignment.
 * Select "Use this Template" and create a new repository using this as a template repo
 
 ## Setup
