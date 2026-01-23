@@ -1,55 +1,82 @@
- # Assignment 2 - unit testing
+# Assignment 2 - Unit Testing & Library Migration
 
-
-This assignment is meant to improve your unit testing skills and teach you a few best practices when it comes to working with external libraries.
-
-This project is using an outdated date library. Your task is to write unit tests for the functions in `src/dateUtils.ts` and then replace the outdated library with a newer one.
-Since the library is abstracted the tests should still pass using the new library.
-
-Another task for you is to add type definition to the `dateUtils.ts` file. Please note that TypeScript is already set up, all you should need to do is to introduce types.
-
+Learn unit testing best practices including mocking, async testing, and error handling. Then practice safe library migration using your tests as a safety net.
 
 **Group size:** 1 person
 
------
+---
 
-## Prerequisite
+## Prerequisites
 
-Make sure you have [Bun](https://bun.sh/) (version 1.3 or later) installed before starting the assignment.
-* Select "Use this Template" and create a new repository using this as a template repo
+- Complete Week 3 in-class exercise (TDD with Vitest)
+- [Bun](https://bun.sh/) version 1.3 or later installed
 
 ## Setup
 
-* `bun install`
+1. Select "Use this Template" to create your own repository
+2. Run `bun install`
 
 ## Commands
-* `npm run test`
-    - This runs the test suite
 
+- `npm run test` - Run test suite
+- `npm run test:coverage` - Run tests with coverage report
 
-------------------
+---
 
-## The assignment
+## The Assignment
 
-Start by looking at `src/dateUtils.ts` and get familiar with the functions.
+### Task 1: Write Unit Tests (Commit 1)
 
-Add Type definition to arguments and functions in `src/dateUtils.ts`.
+Start by examining `src/dateUtils.ts` to understand the functions. Then write comprehensive tests in `src/__tests__/dateUtils.test.ts`.
 
-### **Commit your changes.**
+**Functions to test:**
 
-Go to `src/__tests__/dateUtils.test.ts` and add unit tests that cover each function, please note that some functions can, and should have, more than one unit test.
+| Function | Description | Testing Notes |
+|----------|-------------|---------------|
+| `getCurrentYear()` | Returns current year | Time-dependent - use techniques from Week 3 to make tests deterministic |
+| `add(date, amount, type)` | Adds time to a date | Has error handling for invalid inputs |
+| `isWithinRange(date, from, to)` | Checks if date is between two dates | Has error handling for invalid range |
+| `isDateBefore(date, compareDate)` | Checks if date is before another | - |
+| `isSameDay(date, compareDate)` | Checks if two dates are the same day | - |
+| `getHolidays(year)` | Async: returns holiday dates for a year | Async function |
+| `isHoliday(date)` | Async: checks if date is a holiday | Async function |
 
-### **Commit your changes.**
+**Things to consider:**
+- How do you test functions that depend on the current time?
+- How do you test that functions throw the correct errors?
+- How do you test async functions?
+- What edge cases should you cover? (boundary dates, negative numbers, different unit types)
 
-Once you have written unit tests and feel comfortable with the coverage you have, start replacing the deprecated `moment` library with `date-fns`. There are similar functions available. Look at the documentation (https://date-fns.org/docs/Getting-Started) and you should be able to find functions that behave the same way.
-Your tests suite should not be touched at this point, the unit tests you wrote in the beginning should still be green, because the input and the output stays the same.
+**Commit your changes with a descriptive message.**
 
-### **Commit your changes.**
+---
 
+### Task 2: Add TypeScript Types (Commit 2)
 
---------
+Add type annotations to all function parameters and return types in `src/dateUtils.ts`.
+
+**Commit your changes.**
+
+---
+
+### Task 3: Migrate to date-fns (Commit 3)
+
+Replace the deprecated `moment` library with `date-fns`. Find equivalent functions in the [date-fns documentation](https://date-fns.org/docs/Getting-Started).
+
+**Important:** Do NOT modify your tests! If your tests are well-written, they should all pass after migration. This demonstrates that tests act as a contract - the implementation can change as long as the behavior stays the same.
+
+**Commit your changes.**
+
+---
+
 ## Handin
 
-Add me (arnif) as a contributor to the Github repo. There should be at least 3 commits that include each step described above.
-Add a link to the Github repo when turning in your solution to Canvas.
+1. Add me (arnif) as a contributor to your GitHub repo
+2. Ensure you have at least 3 commits (one per task)
+3. Submit the GitHub repo link to Canvas
 
+## Tips
+
+- Run `npm run test:coverage` to check your test coverage
+- Use descriptive test names that explain the expected behavior
+- Review what you learned in Week 3 about testing async code and mocking
